@@ -13,7 +13,7 @@ const RecorderContext = createContext();
 const RecorderProvider = ({ children }) => {
     const firestoreContext = FirestoreProvider.useGetContext();
     const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
+    const sessionUserId = authContext.sessionUserId;
 
 
     const timerInterval = useRef(null);
@@ -88,7 +88,7 @@ const RecorderProvider = ({ children }) => {
         timerInterval.current = null
     }
 
-    const sendMessagesToServer = async () => {
+    const sendNoteToProcessing = async () => {
         if (storageObj.isSavingBlobBytes) return
 
         if (storageObj.records.length === 0) {
@@ -129,9 +129,7 @@ const RecorderProvider = ({ children }) => {
 
         firestoreContext.setStatus('');
 
-
         showSnackbar('Sent')
-
     }
 
 
@@ -170,7 +168,7 @@ const RecorderProvider = ({ children }) => {
         <RecorderContext.Provider value={{
             startRecording,
             stopRecording,
-            sendMessagesToServer,
+            sendNoteToProcessing,
             isRecording: microphoneObj.isRecording,
             isNotComplete: storageObj.isNotComplete,
             isBusy,

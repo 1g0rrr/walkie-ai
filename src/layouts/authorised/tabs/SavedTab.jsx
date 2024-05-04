@@ -43,7 +43,7 @@ const SavedTab = () => {
                         }}
                     >
                         <List>
-                            {firestoreContext?.savedNotesArray.map(
+                            {firestoreContext.savedNotesArray.map(
                                 (note, index) => (
                                     <Fragment key={note.id}>
                                         <ListItem

@@ -11,7 +11,7 @@ const useStorage = () => {
 
     const firestoreContext = FirestoreProvider.useGetContext();
     const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
+    const sessionUserId = authContext.sessionUserId;
 
     const [isNotComplete, setIsNotComplete] = useState(false);
     const [isSavingBlobBytes, setIsSavingBlobBytes] = useState(false);

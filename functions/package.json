@@ -3,8 +3,8 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint .",
-    "serve": "firebase emulators:start --only functions",
-    "servestore": "firebase emulators:start --only firestore,functions --import firestorePresist --export-on-exit firestorePresist",
+    "servefunc": "firebase emulators:start --only functions",
+    "serve": "firebase emulators:start --only firestore,functions --import firestorePresist --export-on-exit firestorePresist",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",

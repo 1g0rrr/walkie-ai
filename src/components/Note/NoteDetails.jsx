@@ -16,7 +16,7 @@ function calculateReducePercent(originalText, boostedText) {
 
 const NoteDetails = ({ note, currentDate }) => {
     const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
+    const sessionUserId = authContext.sessionUserId;
 
     const showSnackbar = useSnackbar();
     const showConfirm = useConfirm();

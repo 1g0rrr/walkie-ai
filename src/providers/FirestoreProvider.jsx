@@ -6,8 +6,6 @@ import { db, functions } from '../services/firebase';
 
 import AuthProvider from './AuthProvider';
 
-
-
 const FirestoreContext = createContext();
 
 const FirestoreProvider = ({ children }) => {
@@ -15,7 +13,7 @@ const FirestoreProvider = ({ children }) => {
     const params = useParams();
 
     const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
+    const sessionUserId = authContext.sessionUserId;
 
 
     const [userProfile, setUserProfile] = useState({});
@@ -24,7 +22,6 @@ const FirestoreProvider = ({ children }) => {
     const [status, setStatus] = useState('');
     const [isSendingToServer, setIsSendingToServer] = useState(false);
     const [isLoadingDailyObject, setIsLoadingDailyObject] = useState(false);
-
 
     const [toProcessNotes, setToProcessNotes] = useState([]);
 
@@ -36,7 +33,6 @@ const FirestoreProvider = ({ children }) => {
     let tasks = all.filter((item) => item.listName === 'Tasks').sort((a, b) => a.createdAt - b.createdAt);
     let ideas = all.filter((item) => item.listName === 'Ideas').sort((a, b) => a.createdAt - b.createdAt);
     let otherNotes = all.filter((item) => item.listName === 'Other').sort((a, b) => a.createdAt - b.createdAt);
-
 
     const savedNotesArray = Object.values(userProfile?.savedNotes ?? {});
     savedNotesArray?.sort((a, b) => b.createdAt - a.createdAt);
@@ -146,7 +142,6 @@ const FirestoreProvider = ({ children }) => {
         </FirestoreContext.Provider>
     )
 }
-
 
 export default FirestoreProvider
 FirestoreProvider.useGetContext = () => useContext(FirestoreContext);

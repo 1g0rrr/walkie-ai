@@ -4,14 +4,9 @@ import Box from '@mui/material/Box';
 import { grey } from '@mui/material/colors';
 import { useState } from 'react';
 
-import { useConfirm } from 'material-ui-confirm';
-import AuthProvider from '../../providers/AuthProvider';
 import NoteDetails from './NoteDetails';
 
 const NoteCard = ({ note, currentDate }) => {
-    const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
-    const showConfirm = useConfirm();
     const [isUnfolded, setIsUnfolded] = useState(false);
 
     return (

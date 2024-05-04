@@ -23,8 +23,8 @@ const Header = () => {
                             </Typography>
                         </Button>
                     </Box>
-                    {authContext?.firebaseAuthUser && <Typography variant="caption" color="primary.contrastText">{authContext.firebaseAuthUser?.displayName}</Typography>}
-                    {authContext?.firebaseAuthUser ? <IconButton
+                    {authContext.firebaseAuthUser && <Typography variant="caption" color="primary.contrastText">{authContext.firebaseAuthUser?.displayName}</Typography>}
+                    {authContext.firebaseAuthUser ? <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
@@ -42,7 +42,7 @@ const Header = () => {
                         </Button>
                     }
                 </Toolbar>
-                {authContext?.userProfile &&
+                {authContext.userProfile &&
                     <SettingsDialog isDialogOpen={isSettingsDialogOpen} setIsDialogOpen={setIsSettingsDialogOpen} />
                 }
             </AppBar >

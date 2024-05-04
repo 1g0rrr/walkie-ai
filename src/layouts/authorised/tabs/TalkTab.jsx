@@ -25,7 +25,7 @@ const ACTION_UP = 'up';
 const TalkTab = () => {
 
     const authContext = AuthProvider.useGetContext();
-    const sessionUserId = authContext?.sessionUserId;
+    const sessionUserId = authContext.sessionUserId;
 
     const firestoreContext = FirestoreProvider.useGetContext();
     const recorderContext = RecorderProvider.useGetContext();
@@ -40,7 +40,7 @@ const TalkTab = () => {
         if (mainButtonState === "loading") return;
 
         function startRecording() {
-            recorderContext?.startRecording()
+            recorderContext.startRecording()
         }
 
         if (recorderContext.storageObj.records?.length === 0) {
@@ -65,7 +65,7 @@ const TalkTab = () => {
             waitDoubleClickTimer.current = null;
         }
 
-        recorderContext?.stopRecording();
+        recorderContext.stopRecording();
 
     }, [recorderContext])
 
@@ -73,26 +73,26 @@ const TalkTab = () => {
     async function onDoubleClick() {
         clearTimeout(waitDoubleClickTimer.current);
         waitDoubleClickTimer.current = null;
-        await recorderContext?.sendMessagesToServer();
+        await recorderContext.sendNoteToProcessing();
     }
 
     useEffect(() => {
         async function updateButtonState() {
 
-            if (recorderContext?.isRecording) {
+            if (recorderContext.isRecording) {
                 setMainButtonState("record")
             } else {
-                if (recorderContext?.isBusy) {
+                if (recorderContext.isBusy) {
                     setMainButtonState("loading")
                 } else {
-                    setMainButtonState(await recorderContext?.isNotComplete ? "paused" : "primary")
+                    setMainButtonState(await recorderContext.isNotComplete ? "paused" : "primary")
                 }
             }
         }
 
         updateButtonState()
 
-    }, [recorderContext?.isRecording, recorderContext?.isBusy, recorderContext?.isNotComplete])
+    }, [recorderContext.isRecording, recorderContext.isBusy, recorderContext.isNotComplete])
 
     // track physical volume button events on native platforms
     useEffect(() => {
@@ -151,14 +151,14 @@ const TalkTab = () => {
                 }}>
                     <Box sx={{
                     }}>
-                        {recorderContext?.storageObj?.currentNoteTitle
-                            ? <Typography variant="h5" color="initial">{recorderContext?.storageObj?.currentNoteTitle}</Typography>
+                        {recorderContext.storageObj?.currentNoteTitle
+                            ? <Typography variant="h5" color="initial">{recorderContext.storageObj?.currentNoteTitle}</Typography>
                             : <Typography variant="h5" color="initial">&nbsp;</Typography>}
 
-                        {recorderContext?.storageObj?.totalRecordingTime > 0
+                        {recorderContext.storageObj?.totalRecordingTime > 0
                             ?
                             <Typography variant="body1" color={recorderContext.storageObj?.totalRecordingTime > 50 ? "green" : "red"}>
-                                {recorderContext?.storageObj?.totalRecordingTime.toFixed(1)} seconds
+                                {recorderContext.storageObj?.totalRecordingTime.toFixed(1)} seconds
                                 <IconButton aria-label="" sx={{
                                     mt: -0.1,
                                 }} onClick={() => {
@@ -215,9 +215,9 @@ const TalkTab = () => {
                         </IconButton>
                         <div>
                             {mainButtonState === "record" ?
-                                <Typography variant="body1" color="initial">{recorderContext?.recordingTimeSeconds.toFixed(1) + ' sec'}</Typography>
-                                : firestoreContext?.status !== "" ? <Typography variant="body1" color="initial">{firestoreContext?.status}</Typography> : <Typography variant="body1" color="initial">&nbsp;</Typography>}
-                            {firestoreContext?.userProfile.recepientNote?.id && <Typography variant="body1" color="initial" onClick={() => {
+                                <Typography variant="body1" color="initial">{recorderContext.recordingTimeSeconds.toFixed(1) + ' sec'}</Typography>
+                                : firestoreContext.status !== "" ? <Typography variant="body1" color="initial">{firestoreContext.status}</Typography> : <Typography variant="body1" color="initial">&nbsp;</Typography>}
+                            {firestoreContext.userProfile.recepientNote?.id && <Typography variant="body1" color="initial" onClick={() => {
                                 if (!sessionUserId) return;
 
                                 const itemRef = doc(db, "users", sessionUserId);
@@ -225,8 +225,8 @@ const TalkTab = () => {
                                 updateDoc(itemRef, {
                                     [`recepientNote`]: deleteField(),
                                 });
-                            }}>Recepient {firestoreContext?.userProfile.recepientNote?.id}
-                                Text: {firestoreContext?.userProfile.recepientNote?.dateString}
+                            }}>Recepient {firestoreContext.userProfile.recepientNote?.id}
+                                Text: {firestoreContext.userProfile.recepientNote?.dateString}
                             </Typography>
                             }
                         </div>
@@ -246,10 +246,10 @@ const TalkTab = () => {
                         left: 0,
                         mx: 'auto',
                     }}>
-                        {recorderContext?.storageObj?.records?.map((messageObj, index) => {
+                        {recorderContext.storageObj?.records?.map((messageObj, index) => {
                             return <MessageChip key={messageObj.id + messageObj.transctiption + messageObj.noteText} messageObj={messageObj} index={index} />
                         })}
-                        {recorderContext?.storageObj?.isSavingBlobBytes && <CircularProgress size={'1.5rem'} sx={{ mt: 0.8, ml: 1 }} />}
+                        {recorderContext.storageObj?.isSavingBlobBytes && <CircularProgress size={'1.5rem'} sx={{ mt: 0.8, ml: 1 }} />}
                     </Box>
                 </Box>
             </Box>

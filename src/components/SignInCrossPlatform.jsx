@@ -35,7 +35,7 @@ const SignInCrossPlatform = () => {
                     {!authContext.isCheckedInitialAuth && <Typography variant="h4" color="initial">Loading...</Typography>}
                     <br /><br />
                     {authContext.isCheckedInitialAuth && !authContext.isUserLoggedIn && <Typography variant="h4" color="initial">Please login</Typography>}
-                    {(authContext.isCheckedInitialAuth && !authContext.isUserLoggedIn && !authContext?.sessionUserId)
+                    {(authContext.isCheckedInitialAuth && !authContext.isUserLoggedIn && !authContext.sessionUserId)
                         ?
                         <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={() => {
                             signInWithGoogle()

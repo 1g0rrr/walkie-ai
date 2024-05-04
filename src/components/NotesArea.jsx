@@ -109,7 +109,7 @@ const NotesArea = () => {
                 </>
             }
             <List>
-                {firestoreContext?.notesArray.map((note) =>
+                {firestoreContext.notesArray.map((note) =>
                     <ListItem
                         key={note.id}
                         sx={{
