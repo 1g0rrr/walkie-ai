@@ -1,10 +1,10 @@
 import { Box, List, ListItem, ListItemText } from "@mui/material";
 import React, { Fragment } from "react";
 import NoteCard from "../../../components/Note/NoteCard";
-import FirestoreProvider from "../../../providers/FirestoreProvider";
+import { useFirestoreContext } from "../../../providers/FirestoreProvider";
 
 const SavedTab = () => {
-    const firestoreContext = FirestoreProvider.useGetContext();
+    const firestoreContext = useFirestoreContext();
 
     var ua = window.navigator.userAgent;
     var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);

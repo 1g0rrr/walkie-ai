@@ -2,14 +2,14 @@ import { CircularProgress, List, ListItem, ListItemText, Typography } from '@mui
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useNavigate, useParams } from 'react-router-dom';
-import FirestoreProvider from '../providers/FirestoreProvider';
+import { useFirestoreContext } from '../providers/FirestoreProvider';
 import { } from '../services/firebase';
 import NoteCard from './Note/NoteCard';
 
 
 const NotesArea = () => {
 
-    const firestoreContext = FirestoreProvider.useGetContext()
+    const firestoreContext = useFirestoreContext()
 
     const navigate = useNavigate();
     const params = useParams();

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { amber } from '@mui/material/colors';
 import { deleteField, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useConfirm } from 'material-ui-confirm';
-import AuthProvider from '../../providers/AuthProvider';
+import { useAuthContext } from '../../providers/AuthProvider';
 import { useSnackbar } from '../../providers/Snackbar';
 import { db } from '../../services/firebase';
 
@@ -15,7 +15,7 @@ function calculateReducePercent(originalText, boostedText) {
 }
 
 const NoteDetails = ({ note, currentDate }) => {
-    const authContext = AuthProvider.useGetContext();
+    const authContext = useAuthContext();
     const sessionUserId = authContext.sessionUserId;
 
     const showSnackbar = useSnackbar();

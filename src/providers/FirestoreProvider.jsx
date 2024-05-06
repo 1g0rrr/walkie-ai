@@ -3,8 +3,8 @@ import { httpsCallable } from 'firebase/functions';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db, functions } from '../services/firebase';
+import { useAuthContext } from './AuthProvider';
 
-import AuthProvider from './AuthProvider';
 
 const FirestoreContext = createContext();
 
@@ -12,7 +12,7 @@ const FirestoreProvider = ({ children }) => {
 
     const params = useParams();
 
-    const authContext = AuthProvider.useGetContext();
+    const authContext = useAuthContext();
     const sessionUserId = authContext.sessionUserId;
 
 
@@ -144,4 +144,7 @@ const FirestoreProvider = ({ children }) => {
 }
 
 export default FirestoreProvider
-FirestoreProvider.useGetContext = () => useContext(FirestoreContext);
+
+export function useFirestoreContext() {
+    return useContext(FirestoreContext);
+}

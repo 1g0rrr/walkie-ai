@@ -4,15 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { useMicrophone } from '../hooks/useMicrophone';
 import useStorage from '../hooks/useStorage';
 import { db } from '../services/firebase';
-import AuthProvider from './AuthProvider';
-import FirestoreProvider from './FirestoreProvider';
+import { useAuthContext } from './AuthProvider';
+import { useFirestoreContext } from './FirestoreProvider';
 import { useSnackbar } from './Snackbar';
 
 const RecorderContext = createContext();
 
 const RecorderProvider = ({ children }) => {
-    const firestoreContext = FirestoreProvider.useGetContext();
-    const authContext = AuthProvider.useGetContext();
+    const firestoreContext = useFirestoreContext();
+    const authContext = useAuthContext();
     const sessionUserId = authContext.sessionUserId;
 
 
@@ -181,4 +181,6 @@ const RecorderProvider = ({ children }) => {
 }
 
 export default RecorderProvider
-RecorderProvider.useGetContext = () => useContext(RecorderContext);
+export function useRecorderContext() {
+    return useContext(RecorderContext);
+}

@@ -1,12 +1,12 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Typography, useMediaQuery } from '@mui/material';
 import { doc, setDoc } from 'firebase/firestore';
 import { useConfirm } from 'material-ui-confirm';
-import RecorderProvider from '../../../providers/RecorderProvider';
+import { useRecorderContext } from '../../../providers/RecorderProvider';
 import { db, firebaseAuthInstance } from '../../../services/firebase';
 
 const MessageDialog = ({ isDialogOpen, setIsDialogOpen, messageObj, title }) => {
 
-    const recorderContext = RecorderProvider.useGetContext();
+    const recorderContext = useRecorderContext();
     const showConfirm = useConfirm();
     const isXsSize = useMediaQuery(theme => theme.breakpoints.down('sm'));
 

@@ -10,9 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import { deleteField, doc, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import MessageChip from '../../../components/MessageChip';
-import AuthProvider from '../../../providers/AuthProvider';
-import FirestoreProvider from '../../../providers/FirestoreProvider';
-import RecorderProvider from '../../../providers/RecorderProvider';
+import { useAuthContext } from '../../../providers/AuthProvider';
+import { useFirestoreContext } from '../../../providers/FirestoreProvider';
+import { useRecorderContext } from '../../../providers/RecorderProvider';
 import { useSnackbar } from '../../../providers/Snackbar';
 import { db } from '../../../services/firebase';
 
@@ -24,11 +24,11 @@ const ACTION_UP = 'up';
 
 const TalkTab = () => {
 
-    const authContext = AuthProvider.useGetContext();
+    const authContext = useAuthContext();
     const sessionUserId = authContext.sessionUserId;
 
-    const firestoreContext = FirestoreProvider.useGetContext();
-    const recorderContext = RecorderProvider.useGetContext();
+    const firestoreContext = useFirestoreContext();
+    const recorderContext = useRecorderContext();
     const showSnackbar = useSnackbar();
 
     const waitDoubleClickTimer = useRef(null);

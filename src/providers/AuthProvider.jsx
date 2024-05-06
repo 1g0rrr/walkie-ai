@@ -55,7 +55,6 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-
     const [firebaseAuthUser, setFirebaseAuthUser] = useState(null);
     const [userProfile, setUserProfile] = useState(null);
     const [appSettings, setAppSettings] = useState(null);
@@ -178,4 +177,6 @@ const AuthProvider = ({ children }) => {
 
 
 export default AuthProvider
-AuthProvider.useGetContext = () => useContext(AuthContext);
+export function useAuthContext() {
+    return useContext(AuthContext);
+}

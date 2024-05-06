@@ -1,13 +1,13 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Slider, Typography, useMediaQuery } from '@mui/material';
 import { signOut } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
-import AuthProvider from '../../../providers/AuthProvider';
+import { useAuthContext } from '../../../providers/AuthProvider';
 import { db, firebaseAuthInstance } from '../../../services/firebase';
 import SettingsLanguageItem from './SettingsLanguageItem';
 
 const SettingsDialog = ({ isDialogOpen, setIsDialogOpen }) => {
 
-    const authContext = AuthProvider.useGetContext()
+    const authContext = useAuthContext()
 
     const isXsSize = useMediaQuery(theme => theme.breakpoints.down('sm'));
 

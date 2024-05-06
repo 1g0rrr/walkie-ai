@@ -2,13 +2,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthProvider from '../../providers/AuthProvider';
+import { useAuthContext } from '../../providers/AuthProvider';
 import SettingsDialog from './dialogs/SettingsDialog';
 
 const Header = () => {
     const navigate = useNavigate();
 
-    const authContext = AuthProvider.useGetContext();
+    const authContext = useAuthContext();
 
     const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
 

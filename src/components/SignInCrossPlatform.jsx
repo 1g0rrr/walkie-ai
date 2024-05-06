@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { GoogleAuthProvider, getAuth, signInWithCredential } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Header from '../layouts/authorised/Header';
-import AuthProvider from '../providers/AuthProvider';
+import { useAuthContext } from '../providers/AuthProvider';
 
 const signInWithGoogle = async () => {
     // 1. Create credentials on the native layer
@@ -20,7 +20,7 @@ const signInWithGoogle = async () => {
 const SignInCrossPlatform = () => {
 
     const navigate = useNavigate();
-    const authContext = AuthProvider.useGetContext();
+    const authContext = useAuthContext();
 
     return (
         <>

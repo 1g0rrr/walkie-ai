@@ -1,16 +1,16 @@
 import { collection, deleteDoc, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useCallback, useEffect, useState } from 'react';
-import AuthProvider from '../providers/AuthProvider';
 import { db, storage } from '../services/firebase';
 
 import { v4 as uuidv4 } from 'uuid';
-import FirestoreProvider from '../providers/FirestoreProvider';
+import { useAuthContext } from '../providers/AuthProvider';
+import { useFirestoreContext } from '../providers/FirestoreProvider';
 
 const useStorage = () => {
 
-    const firestoreContext = FirestoreProvider.useGetContext();
-    const authContext = AuthProvider.useGetContext();
+    const firestoreContext = useFirestoreContext();
+    const authContext = useAuthContext();
     const sessionUserId = authContext.sessionUserId;
 
     const [isNotComplete, setIsNotComplete] = useState(false);

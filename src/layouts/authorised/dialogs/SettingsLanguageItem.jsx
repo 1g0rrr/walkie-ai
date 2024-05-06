@@ -1,12 +1,12 @@
 import { FormControl, FormLabel, ListItem, MenuItem, Select } from '@mui/material';
 import { doc, updateDoc } from 'firebase/firestore';
-import AuthProvider from '../../../providers/AuthProvider';
+import { useAuthContext } from '../../../providers/AuthProvider';
 import { useSnackbar } from '../../../providers/Snackbar';
 import { db } from '../../../services/firebase';
 
 const SettingsLanguageItem = ({ fieldName, title }) => {
 
-    const authContext = AuthProvider.useGetContext()
+    const authContext = useAuthContext()
     const showSnackbar = useSnackbar();
 
     return (

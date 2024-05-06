@@ -1,11 +1,11 @@
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
-import FirestoreProvider from '../providers/FirestoreProvider';
+import { useFirestoreContext } from '../providers/FirestoreProvider';
 import { useSnackbar } from '../providers/Snackbar';
 
 const TextMessageInput = () => {
 
-    const firestoreContext = FirestoreProvider.useGetContext();
+    const firestoreContext = useFirestoreContext();
     const showSnackbar = useSnackbar();
 
     const [noteText, setNoteText] = useState('');
